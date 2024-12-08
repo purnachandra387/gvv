@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Login</h1>
+        </header>
+        <main>
+            <section>
+                <p>Please log in or register to access Garden Planner features.</p>
+                <a href="{% url 'home' %}" class="button">Return Home</a>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 Garden Planner. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

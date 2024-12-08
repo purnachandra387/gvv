@@ -1,0 +1,64 @@
+/* General styles */
+body {
+    background-color: #fff;
+}
+
+/* Card styles */
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    margin-top: 1rem;
+    flex: 1;
+}
+
+/* Heading styles */
+main h2 {
+    margin-bottom: 1rem;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+form label {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+/* Ensure the body takes up the full height of the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container to hold the entire layout */
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main content should take up all available space */
+main {
+    flex: 1;
+}
+
+/* Footer styles */
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    margin-top: auto;
+}
+/* Specific styles for the register page footer */
+.register-footer {
+    position: relative;
+    margin-top: 2rem;
+}

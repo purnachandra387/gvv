@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garden Planner Home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Garden Planner</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'garden' %}">Garden Planning</a></li>
+                <li><a href="{% url 'plant_growth_log_list' %}">Plant Growth Tracker</a></li>
+                <li><a href="{% url 'add_task' %}">Add Task Reminder</a></li>
+                <li><a href="{% url 'view_tasks' %}">View Task Reminders</a></li>
+                <li><a href="{% url 'category_list' %}">Community Forum</a></li>
+                <li><a href="{% url 'tips:view_tips' %}">Gardening Tips</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% if user.is_authenticated %}
+        <section>
+            <h2>Welcome, {{ user.username }}!</h2>
+            <p>We're glad to have you back in your garden!</p>
+        </section>
+        {% else %}
+        <section>
+            <h2>Welcome to Garden Planner</h2>
+            <p>Log in or register to start planning your garden!</p>
+        </section>
+        {% endif %}
+        <section>
+            <h2>About Garden Planner</h2>
+            <p>Our platform helps you plan, manage, and optimize your home garden. Get personalized gardening tips,
+                track plant growth, and receive reminders for essential gardening tasks. Join our community forum to
+                share your gardening experiences and learn from others.</p>
+        </section>
+        <div>
+            <h2>Featured Tips</h2>
+            <ul>
+                <li>Water your plants early in the morning to reduce water loss due to evaporation.</li>
+                <li>Use mulch to help retain soil moisture and control weeds.</li>
+                <li>Rotate your crops to prevent soil depletion and pest buildup.</li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        
+        <p>&copy; 2024 Garden Planner. All rights reserved.</p>
+    </footer>
+</body>
+</html>

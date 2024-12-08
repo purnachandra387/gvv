@@ -1,0 +1,61 @@
+<!-- templates/post_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Garden Planner</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'garden' %}">Garden Planning</a></li>
+                <li><a href="">Plant Growth Tracker</a></li>
+                <li><a href="{% url 'add_task' %}">Add Task Reminder</a></li> <!-- Add namespace -->
+                 <li><a href="{% url 'view_tasks' %}">View Task Reminders</a></li>
+                <li><a href="{% url 'category_list' %}">Community Forum</a></li>
+                <li><a href="{% url 'tips:view_tips' %}">Gardening Tips</a></li>
+                {% if user.is_authenticated %} 
+                    <li><a href="{% url 'logout' %}">Logout</a></li> 
+                {% else %} 
+                    <li><a href="{% url 'login' %}">Login</a></li> 
+                    <li><a href="{% url 'register' %}">Register</a></li> 
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <div class="container">
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.content }}</p>
+        <p><strong>Author:</strong> {{ post.author.username }}</p>
+        <p><strong>Posted on:</strong> {{ post.created_at }}</p>
+
+        <h2>Comments</h2>
+        <div class="comments">
+            {% for comment in comments %}
+                <div class="comment">
+                    <p>{{ comment.content }}</p>
+                    <p><strong>Author:</strong> {{ comment.author.username }}</p>
+                    <p><strong>Posted on:</strong> {{ comment.created_at }}</p>
+                </div>
+            {% empty %}
+                <p>No comments yet.</p>
+            {% endfor %}
+        </div>
+
+        <h2>Leave a Comment</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Comment</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plant Growth Logs</title>
+</head>
+<body>
+    <h1>Plant Growth Logs</h1>
+    <a href="{% url 'add_plant_growth_log' %}">Add New Log</a>
+    <ul>
+        {% for log in logs %}
+        <li>
+            <strong>{{ log.plant.name }}</strong> - {{ log.date }}<br>
+            {{ log.observation }}<br>
+            {% if log.photo %}
+            <img src="{{ log.photo.url }}" alt="Plant Photo" width="200">
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

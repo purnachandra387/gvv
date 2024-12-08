@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }} - Topics</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Garden Planner</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'garden' %}">Garden Planning</a></li>
+                <li><a href="">Plant Growth Tracker</a></li>
+                <li><a href="{% url 'add_task' %}">Add Task Reminder</a></li> <!-- Add namespace -->
+                 <li><a href="{% url 'view_tasks' %}">View Task Reminders</a></li>
+                <li><a href="{% url 'category_list' %}">Community Forum</a></li>
+                <li><a href="{% url 'tips:view_tips' %}">Gardening Tips</a></li>
+                {% if user.is_authenticated %} 
+                    <li><a href="{% url 'logout' %}">Logout</a></li> 
+                {% else %} 
+                    <li><a href="{% url 'login' %}">Login</a></li> 
+                    <li><a href="{% url 'register' %}">Register</a></li> 
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <h1>Topics in {{ category.name }}</h1>
+    <ul>
+        {% for topic in topics %}
+            <li><a href="{% url 'post_detail' topic.id %}">{{ topic.title }}</a> - Created by {{ topic.creator.username }} on {{ topic.created_at }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'category_list' %}">Back to Categories</a>
+</main>
+</body>
+</html>

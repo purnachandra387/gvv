@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Your Garden</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script> 
+        function filterPlants() { 
+            var soilType = document.getElementById("soil-type").value; 
+            var plantOptions = document.getElementById("plants").options; 
+            for (var i = 0; i < plantOptions.length; i++) { 
+                var plant = plantOptions[i]; 
+                if (plant.getAttribute('data-soil').includes(soilType) || soilType === '') { 
+                    plant.style.display = 'block'; 
+                } 
+                else { 
+                    plant.style.display = 'none'; 
+                } 
+            } 
+        } 
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Plan Your Garden</h1>
+    </header>
+    <main>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="soil-type">Select Your Soil Type:</label> 
+            <select id="soil-type" name="soil_type" onchange="filterPlants()"> 
+                <option value="">-- Select Soil Type --</option>
+                <option value="Clay">Clay</option> 
+                <option value="Sandy">Sandy</option> 
+                <option value="Loamy">Loamy</option> 
+                <option value="Silty">Silty</option> 
+                <option value="Peaty">Peaty</option> 
+                <option value="Chalky">Chalky</option> 
+            </select>
+            <label for="layout">Garden Layout:</label>
+            <textarea id="layout" name="layout">{{ garden.layout }}</textarea>
+            
+            <label for="plants">Choose Plants:</label>
+            <select id="plants" name="plants" multiple>
+                {% for plant in plants %} 
+                <option value="{{ plant.id }}" data-soil="{{ plant.optimal_soil }}" {% if plant in form.plants.value %}selected{% endif %}>{{ plant.name }}</option>
+                 {% endfor %}
+            </select>
+            
+            <button type="submit">Save Garden Plan</button>
+        </form>
+        <section> 
+            <h2>Recommended Plants</h2> 
+            {% if recommended_plants %} 
+            <ul> {% for plant in recommended_plants %} 
+                <li>{{ plant.name }} - Optimal Soil: {{ plant.optimal_soil }}, Optimal Climate: {{ plant.optimal_climate }}</li> 
+                {% endfor %} 
+            </ul> 
+            {% else %} 
+            <p>Select a soil type to see recommended plants.</p> 
+            {% endif %} 
+        </section> 
+        <a href="{% url 'home' %}">Return to Home</a>
+    </main>
+    <footer>
+        <p>&copy; 2024 Garden Planner. All rights reserved.</p>
+    </footer>
+</body>
+</html>

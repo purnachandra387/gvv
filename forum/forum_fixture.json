@@ -1,0 +1,60 @@
+[
+    {
+        "model": "forum.category",
+        "pk": 1,
+        "fields": {
+            "name": "General Discussion",
+            "description": "Talk about anything here."
+        }
+    },
+    {
+        "model": "forum.category",
+        "pk": 2,
+        "fields": {
+            "name": "Tech Talk",
+            "description": "Discuss the latest in technology."
+        }
+    },
+    {
+        "model": "forum.topic",
+        "pk": 1,
+        "fields": {
+            "category": 1,
+            "title": "Welcome to the Forum!",
+            "creator": 1,
+            "created_at": "2024-12-07T16:32:00Z"
+        }
+    },
+    {
+        "model": "forum.topic",
+        "pk": 2,
+        "fields": {
+            "category": 2,
+            "title": "New Tech Trends in 2024",
+            "creator": 1,
+            "created_at": "2024-12-07T16:32:00Z"
+        }
+    },
+    {
+        "model": "forum.post",
+        "pk": 1,
+        "fields": {
+            "topic": 1,
+            "parent": null,
+            "content": "Welcome everyone! Feel free to introduce yourselves.",
+            "author": 1,
+            "created_at": "2024-12-07T16:32:00Z"
+        }
+    },
+    {
+        "model": "forum.post",
+        "pk": 2,
+        "fields": {
+            "topic": 2,
+            "parent": null,
+            "content": "Let's talk about the latest gadgets and innovations.",
+            "author": 1,
+            "created_at": "2024-12-07T16:32:00Z"
+        }
+    }
+]

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Tasks</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Task Reminders</h1>
+    </header>
+    <main>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    <strong>{{ task.task_type|capfirst }}:</strong> {{ task.description }} 
+                    <strong>Due:</strong> {{ task.due_date }}
+                    {% if task.is_completed %}
+                        <span class="completed">Completed</span>
+                    {% else %}
+                        <span class="pending">Pending</span>
+                    {% endif %}
+                    <form method="POST" action="{% url 'update_task_status' task.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <button type="submit">{% if task.is_completed %}Mark as Pending{% else %}Mark as Completed{% endif %}</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'home' %}" class="button">Return to Home</a> 
+    </main>
+    <footer>
+        <p>&copy; 2024 Garden Planner. All rights reserved.</p>
+    </footer>
+</body>
+</html>

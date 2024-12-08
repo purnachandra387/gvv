@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gardening Tips</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Gardening Tips</h1>
+    </header>
+    <main>
+        <ul>
+            {% for tip in tips %}
+                <li>
+                    <h2>{{ tip.title }}</h2>
+                    <p>{{ tip.content }}</p>
+                    <p><strong>Category:</strong> {{ tip.category }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'home' %}" class="button">Return to Home</a> <!-- Add return home button -->
+    </main>
+    <footer>
+        <p>&copy; 2024 Garden Planner. All rights reserved.</p>
+    </footer>
+</body>
+</html>
